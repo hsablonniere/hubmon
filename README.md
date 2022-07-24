@@ -18,7 +18,7 @@ If you want to run a command and rerun it each time a file changes, prefix your 
 
 Here's an example if you want to execute `ls -la src`:
 
-```js
+```
 hubmon ls -la src
 ```
 
@@ -27,7 +27,7 @@ hubmon ls -la src
 By default, all files (except dotfiles) are watched (with the `**/*` glob pattern).
 If you want to only watch some files, you can use a different glob pattern with the `--watch` option (or its short `-w` alias) like this:
 
-```js
+```
 hubmon --watch '*.txt' ls -la src
 ```
 
@@ -37,7 +37,7 @@ WARNING: the quote around the glob pattern is important.
 
 If you often use `hubmon` with commands like `node`, `python` or `ruby`, it can be nice to set some aliases like these:
 
-```js
+```
 alias wnode='hubmon node'
 alias wpython='hubmon python'
 alias wruby='hubmon ruby'
