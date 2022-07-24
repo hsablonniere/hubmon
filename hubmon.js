@@ -2,7 +2,7 @@
 
 import debounceFn from 'debounce-fn';
 import chalk from 'chalk';
-import { getOptionsAndCommand, startProcess } from './lib.js';
+import { getOptionsAndCommand, startProcess, watchFiles } from './lib.js';
 
 // Global state
 let iteration = -1;
