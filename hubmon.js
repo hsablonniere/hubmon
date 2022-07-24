@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import chokidar from 'chokidar';
 import debounceFn from 'debounce-fn';
 import minimist from 'minimist';
