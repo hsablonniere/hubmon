@@ -1,6 +1,12 @@
 {
   "name": "hubmon",
   "version": "0.0.5",
+  "description": "Run a command and restart it when file changes.",
+  "homepage": "https://github.com/hsablonniere/hubmon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hsablonniere/hubmon"
+  },
   "type": "module",
   "bin": {
     "hubmon": "./hubmon.js"
