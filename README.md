@@ -10,12 +10,6 @@ You can install this command line tool with npm like this:
 npm install -g hubmon
 ```
 
-If you're using volta, you can also install it like this
-
-```
-volta install hubmon
-```
-
 ## Usage
 
 ### Basic usage
@@ -39,9 +33,9 @@ hubmon --watch '*.txt' ls -la src
 
 WARNING: the quote around the glob pattern is important.
 
-### Using it with an alias for node
+### Defining aliases for script runners
 
-If you often use `hubmon` with script runners like Node.js, Python or Ruby, it can be nice to set some aliases like these:
+If you often use `hubmon` with commands like `node`, `python` or `ruby`, it can be nice to set some aliases like these:
 
 ```js
 alias wnode='hubmon node'
@@ -49,8 +43,14 @@ alias wpython='hubmon python'
 alias wruby='hubmon ruby'
 ```
 
-This way, in a few keystrokes, you can add the letter `w` at the beginning of your command to trigger hubmon's watching mechanism:
+This way, in a few keystrokes, you can add the letter `w` (like watch) at the beginning of your command to trigger hubmon's watching mechanism:
 
 ```
 wnode my-script.js
 ```
+
+### A note about Volta
+
+If you're using Node.js with [volta](https://volta.sh/), we have a special trick for you.
+By default, the way volta handles automatic version switch would break.
+We added some special code so the versions you defined for `npm`, `yarn` and `node` are the right one.
