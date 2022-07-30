@@ -1,6 +1,6 @@
 {
   "name": "hubmon",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Run a command, watch the filesystem, stop the process on file change and then run the command again...",
   "homepage": "https://github.com/hsablonniere/hubmon",
   "repository": {
