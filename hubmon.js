@@ -9,7 +9,7 @@ import { patchVoltaPath } from './volta.js';
 let iteration = -1;
 let stopProcess = () => null;
 
-const { watchPattern = '**/*', commandName, commandArgs } = getOptionsAndCommand();
+const { watchPatterns = ['**/*'], commandName, commandArgs } = getOptionsAndCommand();
 
 // This tool is sometimes used with Node.js AND Volta
 // They way Volta works means the pinned version of node, yarn or npm won't always be the right one
@@ -27,7 +27,7 @@ const startProcessDebounced = debounceFn(() => {
 }, { wait: 100 });
 
 // On each file change, try to stop process, log and eventually start a new process
-watchFiles(watchPattern, (event, path) => {
+watchFiles(watchPatterns, (event, path) => {
   stopProcess();
   console.log(chalk.yellow(`[hubmon] (${event}) ${path}`));
   startProcessDebounced();

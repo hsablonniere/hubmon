@@ -33,6 +33,14 @@ hubmon --watch '*.txt' ls -la src
 
 WARNING: the quote around the glob pattern is important.
 
+### Using the `--watch` option with multiple patterns
+
+You can pass multiple patterns by join them with a comma like this:
+
+```
+hubmon --watch '*.txt,*.sql' ls -la src
+```
+
 ### Defining aliases for script runners
 
 If you often use `hubmon` with commands like `node`, `python` or `ruby`, it can be nice to set some aliases like these:

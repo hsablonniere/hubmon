@@ -10,7 +10,7 @@ export function getOptionsAndCommand () {
   const hasWatchArgument = args[0] === '--watch' || args[0] === '-w';
   if (hasWatchArgument) {
     return {
-      watchPattern: args[1],
+      watchPatterns: args[1].split(','),
       commandName: args[2],
       commandArgs: args.slice(3),
     };
@@ -79,10 +79,10 @@ export function startProcess (commandName, commandArgs, iteration) {
   return endProcess;
 }
 
-export function watchFiles (watchPattern, callback) {
+export function watchFiles (watchPatterns, callback) {
 
   // Watch file system according to watch pattern option
-  const watcher = chokidar.watch(watchPattern, {
+  const watcher = chokidar.watch(watchPatterns, {
     // ignore dotfiles
     ignored: /(^|[\/\\])\../,
     persistent: true,
