@@ -1,6 +1,6 @@
 # hubmon
 
-Run a command and restart it when file changes.
+Run a command, watch the filesystem, stop the process on file change and then run the command again...
 
 ## Install
 
@@ -14,13 +14,25 @@ npm install -g hubmon
 
 ### Basic usage
 
-If you want to run a command and rerun it each time a file changes, prefix your command with `hubmon`.
+`hubmon` must be used as a prefix before the command you want to run.
 
-Here's an example if you want to execute `ls -la src`:
+Here's an example on how to use `hubmon` with a command like `ls -la src`:
 
 ```
 hubmon ls -la src
 ```
+
+In this example, `hubmon` will:
+
+* watch the filesystem for changes
+* run the command `ls -la src`
+
+On each filesystem change, `hubmon` will:
+
+* kill the process if it's still running
+* run the command `ls -la src` again
+
+NOTE: Killing the process if it's still running is very useful if you command runs an HTTP server for example.
 
 ### Using the `--watch` option
 
@@ -40,6 +52,18 @@ You can pass multiple patterns by join them with a comma like this:
 ```
 hubmon --watch '*.txt,*.sql' ls -la src
 ```
+
+### Ignoring files with the `--watch` option
+
+If you want to ignore some files, you can use patterns prefixed with `!`.
+
+Here's an example where you watch all files in `src` but not the `.sql` files:
+
+```
+hubmon --watch 'src/**/*,!src/**/*.sql' ls -la src
+```
+
+Under the hood, `hubmon` uses [picomatch](https://github.com/micromatch/picomatch) for glob patterns, please refer to their docs for more details.
 
 ### Defining aliases for script runners
 
