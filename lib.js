@@ -24,7 +24,9 @@ export function getOptionsAndCommand () {
 // Start the command in another process with childProcess.spawn()
 export function startProcess (commandName, commandArgs, iteration) {
 
-  let commandProcess = spawn(commandName, commandArgs);
+  let commandProcess = spawn(commandName, commandArgs, {
+    stdio: 'inherit',
+  });
 
   function endProcess () {
 
@@ -34,9 +36,6 @@ export function startProcess (commandName, commandArgs, iteration) {
 
     const { exitCode } = commandProcess;
 
-    // Remove all event listneners (not sure if it's required)
-    commandProcess.stdout.removeAllListeners('data');
-    commandProcess.stderr.removeAllListeners('data');
     commandProcess.removeAllListeners('close');
 
     if (exitCode == null) {
@@ -62,14 +61,6 @@ export function startProcess (commandName, commandArgs, iteration) {
     chalk.yellow(`${chalk.white('pid:')}${commandProcess.pid}`),
     chalk.yellow(`${chalk.white('iteration:')}${iteration}`),
   ].join('  '));
-
-  commandProcess.stdout.on('data', (data) => {
-    process.stdout.write(data.toString());
-  });
-
-  commandProcess.stderr.on('data', (data) => {
-    process.stderr.write(data.toString());
-  });
 
   commandProcess.on('close', () => {
     endProcess();
