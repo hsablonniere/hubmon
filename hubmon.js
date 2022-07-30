@@ -2,7 +2,7 @@
 
 import debounceFn from 'debounce-fn';
 import chalk from 'chalk';
-import { getOptionsAndCommand, startProcess, watchFiles } from './lib.js';
+import { getOptionsAndCommand, getPackageJson, startProcess, watchFiles } from './lib.js';
 import { patchVoltaPath } from './volta.js';
 
 // Global state
@@ -10,6 +10,14 @@ let iteration = -1;
 let stopProcess = () => null;
 
 const { watchPatterns = ['**/*'], commandName, commandArgs } = getOptionsAndCommand();
+
+if (commandName == null) {
+  const packageJson = getPackageJson();
+  console.error(`version: ${packageJson.version}`);
+  console.error(`usage: hubmon [--watch '**/*.sql'] the-command [the command args]`);
+  console.error(`readme: ${packageJson.homepage}`);
+  process.exit(1);
+}
 
 // This tool is sometimes used with Node.js AND Volta
 // They way Volta works means the pinned version of node, yarn or npm won't always be the right one

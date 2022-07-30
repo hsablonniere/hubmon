@@ -3,6 +3,18 @@
 import chalk from 'chalk';
 import { spawn } from 'child_process';
 import chokidar from 'chokidar';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+import path from 'path';
+
+export function getPackageJson (file) {
+  const currentFilename = fileURLToPath(import.meta.url);
+  const currentDirname = path.dirname(currentFilename);
+  const packageJsonFilename = path.join(currentDirname, 'package.json');
+  const packageJsonString = fs.readFileSync(packageJsonFilename, { encoding: 'utf8' });
+  const packageJson = JSON.parse(packageJsonString);
+  return packageJson;
+}
 
 // Dead simple parse arguments for `--watch` or `-w` at the beginning of the command
 export function getOptionsAndCommand () {
